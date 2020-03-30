@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG,"Existe um usuário chamado: "+usuario);
         }
 
-        Intent intent = new Intent(this, ListaSenhasActivity.class);
+        Intent intent = new Intent(this, ListasSenhasActivity.class);
         startActivity(intent);
     }
 

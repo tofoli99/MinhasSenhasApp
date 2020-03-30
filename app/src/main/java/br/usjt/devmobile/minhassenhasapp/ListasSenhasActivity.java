@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaSenhasActivity extends AppCompatActivity {
+public class ListasSenhasActivity extends AppCompatActivity {
 
     private static final String TAG = "ListaSenhasActivity";
     private List<Senha> listaSenhas;
@@ -34,7 +34,11 @@ public class ListaSenhasActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Senha senhaSelecionada = listaSenhas.get(position);
-                Toast.makeText(ListaSenhasActivity.this,"Senha selecionada: "+senhaSelecionada.getNome(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListasSenhasActivity.this,"Senha selecionada: "+senhaSelecionada.getNome(),Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(ListasSenhasActivity.this, DetalhesSenhaActivity.class);
+                intent.putExtra("senha",senhaSelecionada);
+                startActivity(intent);
             }
         });
     }
