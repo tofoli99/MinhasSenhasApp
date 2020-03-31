@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.orhanobut.hawk.Hawk;
 
+import java.util.List;
+
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
     private static final String TAG = "CadastroUsuarioActivity";
