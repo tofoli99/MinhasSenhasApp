@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         if(usuario.getText().toString().equals(Hawk.get("usuario")) &&
             senha.getText().toString().equals(Hawk.get("senha"))){
 
-            Intent intent = new Intent(this, ListaSenhasActivity.class);
+            Intent intent = new Intent(this, ListasSenhasActivity.class);
             startActivity(intent);
         }else{
             Toast.makeText(this,"Usuário ou senha incorretos!",Toast.LENGTH_SHORT).show();
