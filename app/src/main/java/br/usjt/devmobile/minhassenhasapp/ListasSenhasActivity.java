@@ -1,8 +1,10 @@
 package br.usjt.devmobile.minhassenhasapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ListasSenhasActivity extends AppCompatActivity {
 
@@ -46,6 +49,33 @@ public class ListasSenhasActivity extends AppCompatActivity {
 
     public void adicionarSenha(View v){
         Log.d(TAG,"Adicionar senha!");
+
+        // Teste do Banco de Dados ROOM
+
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database-name").build();
+
+
+
+        final User user = new User();toString();
+        Random random = new Random();
+
+        user.firstName = "elcio "+random.nextInt(1000);
+        user.lastName = "abrahao "+random.nextInt(1000);
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.userDao().insertAll(user);
+                for(User u: db.userDao().getAll()){
+                    Log.d("DB","User: "+u.toString());
+                }
+            }
+        });
+
+
+
+
     }
 
     public List<Senha> geraListaSenhas(){
