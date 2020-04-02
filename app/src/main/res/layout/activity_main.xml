@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/WelcomeTextView"
             android:layout_marginTop="10dp"
-            android:text="USJT - Dev Mobile 2020/1"
+            android:text="USJT - Dev Mobile Android 2020/1"
             android:textColor="@color/colorAccent"
             android:textSize="15sp" />
         <LinearLayout
