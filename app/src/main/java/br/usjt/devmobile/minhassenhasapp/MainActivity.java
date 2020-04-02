@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.orhanobut.hawk.Hawk;
@@ -16,9 +17,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    List contas = new ArrayList();
-    private TextInputEditText loginUsuario;
-    private TextInputEditText loginSenha;
+    private TextInputEditText usuario;
+    private TextInputEditText senha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,32 +27,38 @@ public class MainActivity extends AppCompatActivity {
         loginUsuario = (TextInputEditText)findViewById(R.id.emailEditTextInput);
         loginSenha = (TextInputEditText)findViewById(R.id.passwordEditTextInput);
         Hawk.init(this).build();
+
+        usuario = findViewById(R.id.emailEditTextInput);
+        senha = findViewById(R.id.passwordEditTextInput);
+
     }
 
     public void fazerLogin(View view){
-        Hawk.put("loginUsuario", loginUsuario.getText().toString());
-        Hawk.put("loginSenha", loginSenha.getText().toString());
-        if(Hawk.contains("usuario")){
-            String usuario = Hawk.get("usuario");
-            String senha = Hawk.get("senha");
-            String pergunta = Hawk.get("pergunta");
-            String resposta = Hawk.get("resposta");
-            Log.d(TAG,"usuario " + usuario);
-            Log.d(TAG,"senha " + senha);
-            Log.d(TAG,"loginUsuario " + Hawk.get("loginUsuario"));
-            Log.d(TAG,"loginSenha " + Hawk.get("loginSenha"));
-            if(usuario.equals(Hawk.get("loginUsuario")) && senha.equals(Hawk.get("loginSenha")) && Hawk.get("loginUsuario") != null && Hawk.get("loginSenha") != null){
-                Intent intent = new Intent(this, ListaSenhasActivity.class);
-                startActivity(intent);
-            } else {
-                DialogFragment newFragment = new Alertando();
-                newFragment.show(getSupportFragmentManager(), "alert");
-            }
+
+
+
+        if(usuario.getText().toString().equals(Hawk.get("usuario")) &&
+            senha.getText().toString().equals(Hawk.get("senha"))){
+
+            Intent intent = new Intent(this, ListasSenhasActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this,"Usuário ou senha incorretos!",Toast.LENGTH_SHORT).show();
         }
+
+
+
     }
 
     public void novoCadastro(View view){
-        Intent intent = new Intent(this, CadastroUsuarioActivity.class);
-        startActivity(intent);
+
+        if(Hawk.contains("usuario")){
+            Toast.makeText(this,"Usuário já cadastrado!",Toast.LENGTH_SHORT).show();
+        }else{
+            Intent intent = new Intent(this, CadastroUsuarioActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 }
