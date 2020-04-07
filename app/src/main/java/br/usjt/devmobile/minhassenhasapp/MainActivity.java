@@ -31,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
         senha = findViewById(R.id.passwordEditTextInput);
 
     }
-
+// tem que usar o metodo equals porque o "==" é usado para comparar duas strings e como uma das variaveis que esta sendo comparada é um objeto, o método equals é o melhor para ser utilizado  este caso.
     public void fazerLogin(View view) {
-        if (usuario.getText().toString() == Hawk.get("usuario") && senha.getText().toString() == Hawk.get("senha")) {
+        Log.d(TAG,"passou pelo login");
+        if (usuario.getText().toString().equals(Hawk.get("usuario")) && senha.getText().toString().equals(Hawk.get("senha"))) {
             Intent intent = new Intent(this, ListaSenhasActivity.class);
             startActivity(intent);
         } else {
@@ -52,4 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }
