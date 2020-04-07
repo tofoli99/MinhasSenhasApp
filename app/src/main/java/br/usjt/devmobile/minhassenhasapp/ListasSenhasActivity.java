@@ -32,14 +32,14 @@ public class ListasSenhasActivity extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                for(Senha s: db.senhaDao().getAll()){
-                    listaSenhas.add(s);
-                    Log.d("DB","Senha: "+s.toString());
-                }
+                listaSenhas = db.senhaDao().getAll();
             }
         });
 
         senhasListView = findViewById(R.id.senhasListView);
+        if(listaSenhas == null){
+            adicionarSenha(senhasListView);
+        }
 
         ArrayAdapter <Senha> adapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaSenhas);
