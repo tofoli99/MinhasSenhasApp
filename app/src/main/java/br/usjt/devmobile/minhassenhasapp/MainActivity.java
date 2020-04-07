@@ -27,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
         loginUsuario = (TextInputEditText)findViewById(R.id.emailEditTextInput);
         loginSenha = (TextInputEditText)findViewById(R.id.passwordEditTextInput);
         Hawk.init(this).build();
+        //Toast.makeText(getApplicationContext(), Hawk.get("usuario"), Toast.LENGTH_SHORT).show();
+
+        // TESTE PARA CHAMAR A TELA NOVA
+        //Intent intent = new Intent(this, CadastroSenhaActivity.class);
+        //startActivity(intent);
 
         usuario = findViewById(R.id.emailEditTextInput);
         senha = findViewById(R.id.passwordEditTextInput);
@@ -34,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fazerLogin(View view){
-
-
-
         if(usuario.getText().toString().equals(Hawk.get("usuario")) &&
             senha.getText().toString().equals(Hawk.get("senha"))){
 
@@ -51,14 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void novoCadastro(View view){
-
-        if(Hawk.contains("usuario")){
-            Toast.makeText(this,"Usuário já cadastrado!",Toast.LENGTH_SHORT).show();
-        }else{
             Intent intent = new Intent(this, CadastroUsuarioActivity.class);
             startActivity(intent);
-        }
-
-
     }
 }
