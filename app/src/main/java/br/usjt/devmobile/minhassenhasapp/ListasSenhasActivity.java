@@ -46,13 +46,10 @@ public class ListasSenhasActivity extends AppCompatActivity {
         });
     }
 
-
     public void adicionarSenha(View v){
 
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name").build();
-
-
 
         final User user = new User();
         Random random = new Random();

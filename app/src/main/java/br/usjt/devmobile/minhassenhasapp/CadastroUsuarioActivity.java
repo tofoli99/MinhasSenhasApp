@@ -27,6 +27,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         pergunta = (TextInputEditText)findViewById(R.id.perguntaEditTextInput);
         resposta = (TextInputEditText)findViewById(R.id.respostaEditTextInput);
         Hawk.init(this).build();
+        Toast.makeText(getApplicationContext(), "onCreate CadastrousuarioActivy", Toast.LENGTH_SHORT).show();
     }
 
     public void cadastrarUsuario(View view){
