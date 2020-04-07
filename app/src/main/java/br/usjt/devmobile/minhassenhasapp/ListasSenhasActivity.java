@@ -27,7 +27,18 @@ public class ListasSenhasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_senhas);
-        listaSenhas = geraListaSenhas();
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "database-name").build();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                for(Senha s: db.senhaDao().getAll()){
+                    listaSenhas.add(s);
+                    Log.d("DB","Senha: "+s.toString());
+                }
+            }
+        });
+
         senhasListView = findViewById(R.id.senhasListView);
 
         ArrayAdapter <Senha> adapter =
@@ -43,7 +54,7 @@ public class ListasSenhasActivity extends AppCompatActivity {
                 intent.putExtra("senha",senhaSelecionada);
                 startActivity(intent);
             }
-        });
+            });
     }
 
     public void adicionarSenha(View v){
@@ -51,23 +62,32 @@ public class ListasSenhasActivity extends AppCompatActivity {
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name").build();
 
-        final User user = new User();
+        final Senha senha = new Senha();
         Random random = new Random();
 
-        user.firstName = "elcio "+random.nextInt(1000);
-        user.lastName = "abrahao "+random.nextInt(1000);
+        senha.setNome("senha "+random.nextInt(1000));
+        senha.setUsuario("usuario "+random.nextInt(1000));
+        senha.setObservacao("observacao "+random.nextInt(1000));
+        senha.setUrl("url "+random.nextInt(1000));
+        senha.setSenha("senha "+random.nextInt(1000));
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                db.userDao().insertAll(user);
-                for(User u: db.userDao().getAll()){
-                    Log.d("DB","User: "+u.toString());
+                db.senhaDao().insertAll(senha);
+                for(Senha s: db.senhaDao().getAll()){
+                    listaSenhas.add(s);
+                    Log.d("DB","Senha: "+s.toString());
                 }
             }
         });
 
 
+    }
+
+    public void telaAdicionarSenha(View view){
+        Intent intent = new Intent(this, CadastroSenhaActivity.class);
+        startActivity(intent);
     }
 
     public List<Senha> geraListaSenhas(){

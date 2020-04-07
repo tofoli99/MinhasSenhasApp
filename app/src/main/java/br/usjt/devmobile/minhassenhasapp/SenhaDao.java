@@ -11,16 +11,16 @@ import java.util.List;
 public interface SenhaDao {
 
 
-    @Query("SELECT * FROM senha")
-    List<User> getAll();
+    @Query("SELECT * FROM senha;")
+    List<Senha> getAll();
 
     @Query("SELECT * FROM senha WHERE id IN (:passIds)")
-    List<User> loadAllByIds(int[] passIds);
+    List<Senha> loadAllByIds(int[] passIds);
 
     @Insert
-    void insertAll(User... users);
+    void insertAll(Senha... senhas);
 
     @Delete
-    void delete(User user);
+    void delete(Senha senha);
 
 }

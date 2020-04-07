@@ -34,11 +34,16 @@ class CadastroSenhaActivity extends AppCompatActivity {
     public void cadastrarSenha(View view) {
         // TODO fazer o cadastro da senha
         Log.d(TAG,"Clicou em cadastrar senha!!!!!!!");
-        Hawk.put("nome", nome.getText().toString());
-        Hawk.put("usuario", usuario.getText().toString());
-        Hawk.put("senha", senha.getText().toString());
-        Hawk.put("url", url.getText().toString());
-        Hawk.put("observacao", observacao.getText().toString());
+        Senha newSenha = new Senha();
+        newSenha.setNome(nome.getText().toString());
+        newSenha.setUsuario(usuario.getText().toString());
+        newSenha.setSenha(senha.getText().toString());
+        newSenha.setUrl(url.getText().toString());
+        newSenha.setObservacao(observacao.getText().toString());
+
+        SenhaDao senhaDao = null;
+
+        senhaDao.insertAll(newSenha);
 
         Toast.makeText(this,"Senha cadastrada com Sucesso",Toast.LENGTH_LONG).show();
 
