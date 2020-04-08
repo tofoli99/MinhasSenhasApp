@@ -42,9 +42,9 @@ public class CadastroSenhaActivity extends AppCompatActivity {
         final SenhaEntity senhaEntity = new SenhaEntity();
         senhaEntity.setNome(nome.getText().toString());
         senhaEntity.setUsuario(usuario.getText().toString());
-        senhaEntity.setUsuario(senha.getText().toString());
-        senhaEntity.setUsuario(url.getText().toString());
-        senhaEntity.setUsuario(observacao.getText().toString());
+        senhaEntity.setSenha(senha.getText().toString());
+        senhaEntity.setUrl(url.getText().toString());
+        senhaEntity.setObservacao(observacao.getText().toString());
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -54,8 +54,8 @@ public class CadastroSenhaActivity extends AppCompatActivity {
         });
 
         Toast.makeText(this,"Cadastro Realizado com Sucesso",Toast.LENGTH_LONG).show();
-
-        finish();
+        Log.d(TAG,db.senhaDao().getAll().toString());
+        
 
     }
 
