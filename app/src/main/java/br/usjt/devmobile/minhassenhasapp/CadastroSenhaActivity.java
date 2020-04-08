@@ -37,7 +37,7 @@ public class CadastroSenhaActivity extends AppCompatActivity {
         Log.d(TAG,"Clicou no fazer cadastro de senha!");
 
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-appsenhas").build();
+                AppDatabase.class, "database-name").build();
 
         final SenhaEntity senhaEntity = new SenhaEntity();
         senhaEntity.setNome(nome.getText().toString());
@@ -54,8 +54,8 @@ public class CadastroSenhaActivity extends AppCompatActivity {
         });
 
         Toast.makeText(this,"Cadastro Realizado com Sucesso",Toast.LENGTH_LONG).show();
-        Log.d(TAG,db.senhaDao().getAll().toString());
-        
+        //Log.d(TAG,db.senhaDao().getAll().toString());
+        finish();
 
     }
 

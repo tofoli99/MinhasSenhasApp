@@ -76,12 +76,6 @@ public class SenhaEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "SenhaEntity{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", senha='" + senha + '\'' +
-                ", url='" + url + '\'' +
-                ", observacao='" + observacao + '\'' +
-                '}';
+        return nome;
     }
 }
