@@ -16,32 +16,29 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class ListasSenhasActivity extends AppCompatActivity {
 
     private static final String TAG = "ListaSenhasActivity";
     private List<Senha> listaSenhas;
     private ListView senhasListView;
+    private AppDatabase db;
+    ArrayAdapter <Senha> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_senhas);
-        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+        db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name").build();
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                listaSenhas = db.senhaDao().getAll();
-            }
-        });
+        listaSenhas = geraListaSenhas();
+        Log.d("ACTIVITY", "tam: "+listaSenhas.size());
 
         senhasListView = findViewById(R.id.senhasListView);
-        if(listaSenhas == null){
-            adicionarSenha(senhasListView);
-        }
 
-        ArrayAdapter <Senha> adapter =
+
+        adapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaSenhas);
         senhasListView.setAdapter(adapter);
         senhasListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -57,58 +54,68 @@ public class ListasSenhasActivity extends AppCompatActivity {
             });
     }
 
-    public void adicionarSenha(View v){
-
-        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name").build();
-
-        final Senha senha = new Senha();
-        Random random = new Random();
-
-        senha.setNome("senha "+random.nextInt(1000));
-        senha.setUsuario("usuario "+random.nextInt(1000));
-        senha.setObservacao("observacao "+random.nextInt(1000));
-        senha.setUrl("url "+random.nextInt(1000));
-        senha.setSenha("senha "+random.nextInt(1000));
-
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                db.senhaDao().insertAll(senha);
-                for(Senha s: db.senhaDao().getAll()){
-                    listaSenhas.add(s);
-                    Log.d("DB","Senha: "+s.toString());
-                }
-            }
-        });
-
-
+    @Override
+    protected void onResume(){
+        super.onResume();
+        listaSenhas = geraListaSenhas();
+        if(adapter != null) {
+            adapter.clear();
+            adapter.addAll(listaSenhas);
+            adapter.notifyDataSetChanged();
+        }
     }
 
+//    public void adicionarSenha(View v){
+//
+//        final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+//                AppDatabase.class, "database-name").build();
+//
+//        final Senha senha = new Senha();
+//        Random random = new Random();
+//
+//        senha.setNome("senha "+random.nextInt(1000));
+//        senha.setUsuario("usuario "+random.nextInt(1000));
+//        senha.setObservacao("observacao "+random.nextInt(1000));
+//        senha.setUrl("url "+random.nextInt(1000));
+//        senha.setSenha("senha "+random.nextInt(1000));
+//
+//        AsyncTask.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                db.senhaDao().insertAll(senha);
+//                for(Senha s: db.senhaDao().getAll()){
+//                    listaSenhas.add(s);
+//                    Log.d("DB","Senha: "+s.toString());
+//                }
+//            }
+//        });
+//
+//
+//    }
+
     public void telaAdicionarSenha(View view){
-        Intent intent = new Intent(this, CadastroSenhaActivity.class);
+        Intent intent = new Intent(this, CadastroSenha2Activity.class);
         startActivity(intent);
     }
 
-    public List<Senha> geraListaSenhas(){
-        ArrayList<Senha> lista = new ArrayList<>();
-        lista.add(new Senha("Senha 1"));
-        lista.add(new Senha("Senha 2"));
-        lista.add(new Senha("Senha 3"));
-        lista.add(new Senha("Senha 4"));
-        lista.add(new Senha("Senha 5"));
-        lista.add(new Senha("Senha 6"));
-        lista.add(new Senha("Senha 7"));
-        lista.add(new Senha("Senha 8"));
-        lista.add(new Senha("Senha 9"));
-        lista.add(new Senha("Senha 10"));
-        lista.add(new Senha("Senha 11"));
-        lista.add(new Senha("Senha 12"));
-        lista.add(new Senha("Senha 13"));
-        lista.add(new Senha("Senha 14"));
-        lista.add(new Senha("Senha 15"));
-        lista.add(new Senha("Senha 16"));
-        lista.add(new Senha("Senha 17"));
+    public List<Senha> geraListaSenhas()  {
+
+        List<Senha> lista = null;
+        try {
+            lista = new GetSenhasAsyncTask().execute().get();
+        }catch (ExecutionException e1){
+            e1.printStackTrace();
+        }catch (InterruptedException e2){
+            e2.printStackTrace();
+        }
         return lista;
+    }
+
+    private class GetSenhasAsyncTask extends AsyncTask<Void, Void,List<Senha>>
+    {
+        @Override
+        protected List<Senha> doInBackground(Void... url) {
+            return db.senhaDao().getAll();
+        }
     }
 }

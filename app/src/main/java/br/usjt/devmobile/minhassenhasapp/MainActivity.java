@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loginUsuario = (TextInputEditText)findViewById(R.id.emailEditTextInput);
-        loginSenha = (TextInputEditText)findViewById(R.id.passwordEditTextInput);
+//        loginUsuario = (TextInputEditText)findViewById(R.id.emailEditTextInput);
+//        loginSenha = (TextInputEditText)findViewById(R.id.passwordEditTextInput);
         Hawk.init(this).build();
         //Toast.makeText(getApplicationContext(), Hawk.get("usuario"), Toast.LENGTH_SHORT).show();
 

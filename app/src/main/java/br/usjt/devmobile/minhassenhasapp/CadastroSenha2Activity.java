@@ -1,34 +1,37 @@
 package br.usjt.devmobile.minhassenhasapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.orhanobut.hawk.Hawk;
 
-import java.util.Random;
-class CadastroSenhaActivity extends AppCompatActivity {
+public class CadastroSenha2Activity extends AppCompatActivity {
     private static final String TAG = "CadastroSenhaActivity";
     private TextInputEditText nome;
     private TextInputEditText usuario;
     private TextInputEditText senha;
     private TextInputEditText url;
     private TextInputEditText observacao;
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_senha);
+        setContentView(R.layout.activity_cadastro_senha2);
+        db = Room.databaseBuilder(this.getApplicationContext(),
+                AppDatabase.class, "database-name").build();
         nome = (TextInputEditText)findViewById(R.id.nomeEditTextInput);
         usuario = (TextInputEditText)findViewById(R.id.usuarioEditTextInput);
         senha = (TextInputEditText)findViewById(R.id.senhaEditTextInput);
-        url = (TextInputEditText)findViewById(R.id.urlEditTextLayout);
-        observacao = (TextInputEditText)findViewById(R.id.obsEditTextLayout);
+        url = (TextInputEditText)findViewById(R.id.urlEditTextInput);
+        observacao = (TextInputEditText)findViewById(R.id.obsEditTextInput);
         Hawk.init(this).build();
     }
     public void cadastrarSenha(View view) {
@@ -41,12 +44,23 @@ class CadastroSenhaActivity extends AppCompatActivity {
         newSenha.setUrl(url.getText().toString());
         newSenha.setObservacao(observacao.getText().toString());
 
-        SenhaDao senhaDao = null;
-
-        senhaDao.insertAll(newSenha);
-
-        Toast.makeText(this,"Senha cadastrada com Sucesso",Toast.LENGTH_LONG).show();
+        new SaveSenhaAsyncTask().execute(newSenha);
 
         finish();
+    }
+
+    private class SaveSenhaAsyncTask extends AsyncTask<Senha, Void, Boolean>
+    {
+        @Override
+        protected Boolean doInBackground(Senha... senha) {
+            db.senhaDao().insertAll(senha);
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean sucess){
+            Toast.makeText(CadastroSenha2Activity.this,"Senha criada com sucesso!",Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }

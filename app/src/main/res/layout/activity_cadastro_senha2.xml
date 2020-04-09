@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroSenhaActivity">
-
+    tools:context=".CadastroSenha2Activity">
 
     <RelativeLayout
         android:id="@+id/afterAnimationView"
@@ -131,6 +130,5 @@
             android:textSize="16sp" />
 
     </RelativeLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
