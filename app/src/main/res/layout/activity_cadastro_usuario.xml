@@ -27,10 +27,34 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/layoutImage"
+            android:layout_below="@+id/WelcomeTextView"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.rishabhharit.roundedimageview.RoundedImageView
+                android:id="@+id/userImage"
+                app:cornerRadius="1000dp"
+                android:src="@drawable/ic_person_gray"
+                android:layout_height="100dp"
+                android:layout_width="100dp"/>
+            <ImageButton
+                android:id="@+id/updateImageButton"
+                android:background="@drawable/ic_control_point"
+                android:onClick="selecinarImagem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/loginButton"
-            android:layout_below="@+id/WelcomeTextView"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/layoutImage"
             android:gravity="center"
             android:orientation="vertical">
 

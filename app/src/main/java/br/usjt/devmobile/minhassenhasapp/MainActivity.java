@@ -3,19 +3,26 @@ package br.usjt.devmobile.minhassenhasapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.orhanobut.hawk.Hawk;
+import com.rishabhharit.roundedimageview.RoundedImageView;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private TextInputEditText usuario;
     private TextInputEditText senha;
+    private RoundedImageView imagem;
+    private LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
         usuario = findViewById(R.id.emailEditTextInput);
         senha = findViewById(R.id.passwordEditTextInput);
+        imagem = findViewById(R.id.userImageMain);
+        layout = findViewById(R.id.layoutImage);
+        if(Hawk.contains("imagem")){
+            String filePath = Hawk.get("imagem",null);
+            Log.d(TAG,"Chegou aqui: "+ filePath);
+            layout.setVisibility(View.VISIBLE);
+            imagem.setImageURI(Uri.fromFile(new File(filePath)));
+        }
 
     }
 
@@ -55,5 +70,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Hawk.contains("imagem")){
+            String filePath = Hawk.get("imagem",null);
+            Log.d(TAG,"Chegou aqui: "+ filePath);
+            layout.setVisibility(View.VISIBLE);
+            imagem.setImageURI(Uri.fromFile(new File(filePath)));
+        }
     }
 }
