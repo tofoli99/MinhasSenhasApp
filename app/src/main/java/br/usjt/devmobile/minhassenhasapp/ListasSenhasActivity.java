@@ -1,10 +1,14 @@
 package br.usjt.devmobile.minhassenhasapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +30,11 @@ public class ListasSenhasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_senhas);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
          db = Room.databaseBuilder(this.getApplicationContext(),
                 AppDatabase.class, "database-name").build();
         listaSenhas = geraListaSenhas();
@@ -48,10 +57,61 @@ public class ListasSenhasActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_lista_senhas, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_crescente:
+                    geraListaSenhasOrdemCrescente();
+                break;
+            case R.id.action_decrescente:
+                Toast.makeText(this, "Item2 selecionado", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            case R.id.action_busca:
+                Toast.makeText(this, "Item3 selecionado", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            case R.id.action_original:
+                geraListaOriginal();
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+
     @Override
     protected void onResume(){
         super.onResume();
         listaSenhas = geraListaSenhas();
+        if(adapter != null) {
+            adapter.clear();
+            adapter.addAll(listaSenhas);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void geraListaOriginal(){
+        listaSenhas = geraListaSenhas();
+        if(adapter != null) {
+            adapter.clear();
+            adapter.addAll(listaSenhas);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void geraListaSenhasOrdemCrescente(){
+        listaSenhas = geraListaSenhasAsc();
         if(adapter != null) {
             adapter.clear();
             adapter.addAll(listaSenhas);
@@ -82,6 +142,27 @@ public class ListasSenhasActivity extends AppCompatActivity {
         @Override
         protected List<Senha> doInBackground(Void... url) {
             return db.senhaDao().getAll();
+        }
+    }
+
+    public List<Senha> geraListaSenhasAsc()  {
+
+        List<Senha> lista = null;
+        try {
+            lista = new GetSenhasAsyncTaskAsc().execute().get();
+        }catch (ExecutionException e1){
+            e1.printStackTrace();
+        }catch (InterruptedException e2){
+            e2.printStackTrace();
+        }
+        return lista;
+    }
+
+    private class GetSenhasAsyncTaskAsc extends AsyncTask<Void, Void,List<Senha>>
+    {
+        @Override
+        protected List<Senha> doInBackground(Void... url) {
+            return db.senhaDao().getAllAsc();
         }
     }
 }

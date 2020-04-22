@@ -24,4 +24,7 @@ public interface SenhaDao {
 
     @Delete
     void delete(Senha senha);
+
+    @Query("SELECT * FROM senha ORDER BY nome DESC")
+    List<Senha> getAllAsc();
 }
