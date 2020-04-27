@@ -19,6 +19,7 @@
     app:layout_constraintEnd_toEndOf="parent"/>
 
     <LinearLayout
+        android:id="@+id/layoutTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
@@ -44,5 +45,154 @@
             android:text="Nome da Senha"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTitulo"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewUsuarioLabel"
+            android:text="Usuário:"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewUsuarioValue"
+            android:text="Fulano de Tal"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/layoutUsuario"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewSenhaLabel"
+            android:text="Senha:"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewSenhaValue"
+            android:text="xxxyyyy"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/layoutSenha"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewUrlLabel"
+            android:text="URL:"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewUrlValue"
+            android:text="http://usjt.br"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutObs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/layoutUrl"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewObsLabel"
+            android:text="Obs:"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:lines="5"
+            android:gravity="right"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewObsValue"
+            android:text="observação observação observação observação observação observação observação observação "/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/layoutObs"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonDeletar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="deletarSenha"
+            android:text="Deletar"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/buttonAlterar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:onClick="alterarSenha"
+            android:text="Alterar"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonFechar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Fechar"
+        android:onClick="fecharTela"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
