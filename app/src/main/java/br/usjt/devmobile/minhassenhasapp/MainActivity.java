@@ -11,18 +11,24 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.maksim88.easylogin.EasyLogin;
+import com.maksim88.easylogin.listener.OnLoginCompleteListener;
+import com.maksim88.easylogin.networks.GooglePlusNetwork;
+import com.maksim88.easylogin.networks.SocialNetwork;
 import com.orhanobut.hawk.Hawk;
 import com.rishabhharit.roundedimageview.RoundedImageView;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnLoginCompleteListener {
 
     private static final String TAG = "MainActivity";
     private TextInputEditText usuario;
     private TextInputEditText senha;
     private RoundedImageView imagemMain;
     private LinearLayout layoutImagem;
+    private EasyLogin easyLogin;
+    private GooglePlusNetwork gPlusNetwork;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         layoutImagem = findViewById(R.id.layoutImagemMain);
 
         colocaImagem();
+
+        EasyLogin.initialize();
+        easyLogin = EasyLogin.getInstance();
+        easyLogin.addSocialNetwork(new GooglePlusNetwork(this));
+        gPlusNetwork = (GooglePlusNetwork) easyLogin.getSocialNetwork(SocialNetwork.Network.GOOGLE_PLUS);
 
     }
 
@@ -71,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        easyLogin.onActivityResult(requestCode, resultCode, data);
+    }
+
     public void novoCadastro(View view){
 
         if(Hawk.contains("usuario")){
@@ -81,5 +98,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void fazerLoginGoogle(View view) {
+        if (!gPlusNetwork.isConnected()) {
+            gPlusNetwork.requestLogin(this);
+        }
+
+    }
+
+    @Override
+    public void onLoginSuccess(SocialNetwork.Network network) {
+        Intent intent = new Intent(this, CadastroUsuarioActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onError(SocialNetwork.Network socialNetwork, String errorMessage) {
+        Log.e("MainActivity","ERRO: "+errorMessage);
+        Toast.makeText(this,"Login no Google Falhou!",Toast.LENGTH_SHORT).show();
     }
 }
