@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "127400501850",
+    "firebase_url": "https://usjt-projects.firebaseio.com",
+    "project_id": "usjt-projects",
+    "storage_bucket": "usjt-projects.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127400501850:android:41e5eb889376e374816e63",
+        "android_client_info": {
+          "package_name": "br.usjt.devmobile.minhassenhasapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127400501850-ot0qbgva5p7job9o77cmhmb994jr96jv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.usjt.devmobile.minhassenhasapp",
+            "certificate_hash": "2fdbe5428ec24e8696cbb371de47f44cc5d30283"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1iSS4C8DpKli72qCxw5QXAfR9RIWjjJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127400501850-3f0qb1c21tbt7u95c4dovuctm6tt7opj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

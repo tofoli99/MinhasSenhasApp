@@ -151,7 +151,6 @@
 
         </LinearLayout>
 
-
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
@@ -164,6 +163,9 @@
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
+
+
+
         <TextView
             android:id="@+id/skipTextView"
             android:layout_width="match_parent"
