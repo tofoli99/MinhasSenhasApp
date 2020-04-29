@@ -37,6 +37,9 @@ public class DetalhesSenhaActivity extends AppCompatActivity {
 
     public void deletarSenha(View view) {
         // TODO Os alunos devem implementar isso como trabalho da semana
+        Intent intent = new Intent(this, CadastroSenhaActivity.class);
+        intent.putExtra("excluir",senha);
+        startActivity(intent);
         finish();
     }
 

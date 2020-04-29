@@ -19,6 +19,7 @@
     app:layout_constraintEnd_toEndOf="parent"/>
 
     <LinearLayout
+        android:id="@+id/linearNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
@@ -44,5 +45,152 @@
             android:text="Nome da Senha"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/linearNome"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewUsuarioLabel"
+            android:text="Usuario:"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewUsuarioValue"
+            android:text="Fulano"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/linearUsuario"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewSenhaLabel"
+            android:text="Senha:"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewSenhaValue"
+            android:text="XPTO"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/linearSenha"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewUrlLabel"
+            android:text="Url:"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewUrlValue"
+            android:text="www.google.com"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearObs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/linearURL"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewObsLabel"
+            android:text="Obs:"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/colorTextView"
+            android:id="@+id/textViewObsValue"
+            android:text="Lorem ipsem"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_Buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/linearObs"
+        android:orientation="horizontal">
+        
+        <Button
+            android:id="@+id/buttonDeletar"
+            android:layout_width="16dp"
+            android:layout_weight="1"
+            android:text="Deletar"
+            android:layout_height="wrap_content"></Button>
+
+        <Button
+            android:id="@+id/buttonAltararCadastro"
+            android:layout_width="16dp"
+            android:layout_weight="1"
+            android:text="Alterar"
+            android:layout_height="wrap_content"></Button>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonFechar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Fechar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
