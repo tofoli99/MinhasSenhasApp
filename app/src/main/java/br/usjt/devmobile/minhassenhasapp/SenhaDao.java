@@ -31,4 +31,10 @@ public interface SenhaDao {
 
     @Query("SELECT * FROM senha ORDER BY nome DESC")
     List<Senha> getAllAsc();
+
+    @Query("SELECT * FROM senha ORDER BY nome ASC")
+    List<Senha> getAllDesc();
+
+    @Query("SELECT * FROM senha WHERE nome like :nome")
+    List<Senha> getFiltroNome(String nome);
 }
