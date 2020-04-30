@@ -13,7 +13,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.drive.Drive;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.orhanobut.hawk.Hawk;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity  {
 //                        .build();
 
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("127400501850-3f0qb1c21tbt7u95c4dovuctm6tt7opj.apps.googleusercontent.com")
+                .requestIdToken("xxxxxxxxxxxx")
                 .requestEmail()
                 .build();
 
@@ -141,6 +140,7 @@ public class MainActivity extends AppCompatActivity  {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.e("LOGINLOGIN", "signInResult:failed code=" + e.getStatusCode());
+            Toast.makeText(this,"Autenticação do Google falhou!",Toast.LENGTH_SHORT).show();
             //updateUI(null);
         }
     }

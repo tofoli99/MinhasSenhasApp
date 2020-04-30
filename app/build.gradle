@@ -46,9 +46,15 @@ dependencies {
     implementation 'com.rishabhharit.roundedimageview:RoundedImageView:0.8.4'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'
 
-    implementation 'com.google.android.gms:play-services:12.0.1'
+    //implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
     implementation 'com.android.support:multidex:1.0.3'
+
+// https://mvnrepository.com/artifact/com.facebook.android/facebook-login
+    implementation 'com.facebook.android:facebook-login:6.5.1'
+
+
 
 
     testImplementation 'junit:junit:4.12'
