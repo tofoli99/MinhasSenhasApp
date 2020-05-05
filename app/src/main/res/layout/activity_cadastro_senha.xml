@@ -118,7 +118,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/buttonAltararCadastro"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"

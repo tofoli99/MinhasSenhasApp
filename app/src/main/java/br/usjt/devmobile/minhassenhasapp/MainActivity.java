@@ -1,7 +1,6 @@
 package br.usjt.devmobile.minhassenhasapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,20 +8,29 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.orhanobut.hawk.Hawk;
 import com.rishabhharit.roundedimageview.RoundedImageView;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private static final String TAG = "MainActivity";
     private TextInputEditText usuario;
     private TextInputEditText senha;
     private RoundedImageView imagemMain;
     private LinearLayout layoutImagem;
+    /* Request code used to invoke sign in user interactions. */
+    private static final int RC_SIGN_IN = 9001;
+    private GoogleSignInClient mSignInClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,19 @@ public class MainActivity extends AppCompatActivity {
         layoutImagem = findViewById(R.id.layoutImagemMain);
 
         colocaImagem();
+
+        //Google+ Login
+//        GoogleSignInOptions options =
+//                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                        .requestScopes(Drive.SCOPE_FILE)
+//                        .build();
+
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("xxxxxxxxxxxx")
+                .requestEmail()
+                .build();
+
+        mSignInClient = GoogleSignIn.getClient(this, options);
 
     }
 
@@ -71,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void novoCadastro(View view){
 
         if(Hawk.contains("usuario")){
@@ -81,5 +103,45 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void fazerLoginGoogle(View view) {
+        signIn();
+    }
+
+
+    private void signIn() {
+        // Launches the sign in flow, the result is returned in onActivityResult
+        Intent intent = mSignInClient.getSignInIntent();
+        startActivityForResult(intent, RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            Intent intent = new Intent(this, ListasSenhasActivity.class);
+            startActivity(intent);
+            // Signed in successfully, show authenticated UI.
+            //updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.e("LOGINLOGIN", "signInResult:failed code=" + e.getStatusCode());
+            Toast.makeText(this,"Autenticação do Google falhou!",Toast.LENGTH_SHORT).show();
+            //updateUI(null);
+        }
     }
 }
