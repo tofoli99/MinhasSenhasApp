@@ -122,35 +122,17 @@
 
 
 
-        <LinearLayout
-            android:id="@+id/my_button"
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_button"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_above="@+id/loginButton"
+            android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:background="#FF3E30"
-            android:onClick="fazerLoginGoogle"
-            android:gravity="center"
             android:orientation="horizontal"
-            android:clickable="true">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_icons8_google" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:text="Logar com Google" />
-
-        </LinearLayout>
-
+            android:clickable="true"
+            android:layout_above="@+id/loginButton"
+            android:onClick="fazerLoginFacebook"
+            />
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
